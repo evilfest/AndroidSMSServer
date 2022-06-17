@@ -17,6 +17,8 @@ import javax.net.ssl.KeyManagerFactory;
 
 import fi.iki.elonen.NanoHTTPD;
 
+import github.umer0586.smsserver.util.IpUtil;
+
 public class SMSServer extends NanoHTTPD {
 
 
@@ -305,11 +307,11 @@ public class SMSServer extends NanoHTTPD {
     @Override
     public void start() throws IOException
     {
-
          super.start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
-           if(onStartedListener!=null)
-               onStartedListener.onStarted(getHostname(),getListeningPort());
-
+           if(onStartedListener!=null) {
+               String hostIp = IpUtil.getWifiIpAddress(this.context);
+               onStartedListener.onStarted(hostIp != null ? hostIp : "127.0.0.1", getListeningPort());
+           }
     }
 
 

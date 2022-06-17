@@ -105,14 +105,8 @@ public class ServerFragment extends Fragment implements SMSServer.onStartedListe
         }
 
 
-        String hostIp = IpUtil.getWifiIpAddress(getContext());
+        String hostIp = "0.0.0.0";
         int portNo = sharedPreferences.getInt(getString(R.string.pref_key_port_no),8080);
-
-        if( hostIp == null )
-        {
-            Snackbar.make(getView(),"No Network",Snackbar.LENGTH_SHORT).show();
-            return;
-        }
 
         smsServer = new SMSServer(getContext(),hostIp,portNo);
         smsServer.setOnStartedListener(this);
