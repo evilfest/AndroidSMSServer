@@ -103,6 +103,17 @@ public class SMSServer extends NanoHTTPD {
 
         final HashMap<String,Object> responseBody = new HashMap<>();
 
+        if(session.getMethod() == Method.GET && session.getUri().equalsIgnoreCase("/")) {
+            responseBody.clear();
+            responseBody.put("status","OK");
+
+            return newFixedLengthResponse(
+                    Response.Status.OK,
+                    "application/json",
+                    toJSON(responseBody)
+            );
+        }
+
         // check requested method
         if(session.getMethod() != Method.POST)
         {
