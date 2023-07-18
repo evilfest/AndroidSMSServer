@@ -71,7 +71,7 @@ public class SMSSender {
 
         //This PendingIntent is broadcast when the message is successfully sent, or failed.
         // The result code will be Activity.RESULT_OK for success
-        PendingIntent sentPI = PendingIntent.getBroadcast(this.context, 0, new Intent(SENT), 0);
+        PendingIntent sentPI = PendingIntent.getBroadcast(this.context, 0, new Intent(SENT), 0 | PendingIntent.FLAG_IMMUTABLE);
 
         //This PendingIntent is broadcast when the message is delivered to the recipient.
         // The raw pdu of the status report is in the extended data ("pdu").
